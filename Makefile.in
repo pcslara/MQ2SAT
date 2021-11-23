@@ -1,0 +1,21 @@
+CC=gcc
+CFLAGS=-c
+DEBUG=
+OPT=-O3
+VERSION=0.0.2
+ALLCODE=mq2sat.c bits.h parsemap.h galois.h
+all: mq2sat
+
+mq2sat: $(ALLCODE)
+	$(CC) mq2sat.c $(DEBUG) $(OPT) -I./ -o mq2sat
+install:
+	cp mq2sat /usr/bin
+clean:
+	rm -rf mq2sat
+build:
+	rm -rf mq2sat
+	rm -rf mq2sat*.tar.gz
+	if [ ! -d "./mq2sat" ]; then mkdir ./mq2sat; fi
+	cp -r configure configure.ac Makefile.in *.c *.h ./mq2sat
+	tar czvf mq2sat_v$(VERSION).tar.gz mq2sat
+	rm -rf ./mq2sat
